@@ -5,13 +5,14 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 Testlii b;
-
+Part1 a;
+int phase = 0;
 long startTime = 0;
 int duration = 3000;
 PImage img;
 void setup ()
 {
-  startTime = millis();
+ startTime = millis();
 minim = new Minim(this);
   b = new Testlii();
   //fullScreen();
@@ -25,6 +26,8 @@ ap.play();
 ab = ap.mix;
 halfH = height/2;
 //colorInc= 255/(float)ab.size();
+fill(2);
+
 }
  Minim minim;
   AudioPlayer ap;
@@ -36,37 +39,42 @@ halfH = height/2;
   
 float lerpedAverage = 0;
 void draw()
-{if (millis() - startTime > duration){
-display();
-startTime = millis();
+{
+    image(img, 0, 0); 
+//background(200);
+if (phase == 0) {
+text("phase 0", 100, 100);
+if (millis() - startTime > duration) {
+  setup1();
+  Part1draw();
+  startTime = millis();
+phase = 1;
+}
+}
+if(phase == 1){
+text("phase 1", 100, 100);
+setup1();
+  Part1draw();
+if (millis() - startTime > duration*18) {
+
+phase = 2 ;
+}
 }
 
-  image(img, 0, 0);
- // background(0);
+if(phase == 2){
+text("phase 2", 100, 100);
+setup2(); 
 display();
-  float sum = 0;
-  for(int i = 0;i<ab.size();i++)
-  {
-    stroke(155,255,255);
-line(i,halfH-lerpedBuffer[i]*sum,i,halfH+lerpedBuffer[i]*halfH);
-    sum += abs(ab.get(i));
-  lerpedBuffer[i] = lerp(lerpedBuffer[i],ab.get(i),0.1f);
-//line(i, halfH-lerpedBuffer[i]*halfH * 4.0f, halfH+lerpedBuffer[i]*halfH * 4.0f, i);
+if (millis() - startTime > duration*21.3) {
+
+phase = 2;
 }
-
-float average = sum / (float)ab.size();
-  lerpedAverage = lerp(lerpedAverage,average,0.1f);
-   // fill(155*average,255,255);
-  //circle(width/2,height/2,average*560);
 }
-
-void timer(){
-  duration = 200;
-long startTime = System.nanoTime();
-display();
-long endTime = System.nanoTime();
-
-long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-
   
 }
+  
+
+
+  
+  
+  
