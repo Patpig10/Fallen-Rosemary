@@ -6,10 +6,12 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 Testlii b;
 Part1 a;
+Snow s;
 int phase = 0;
 long startTime = 0;
 int duration = 3000;
 PImage img;
+PImage img1;
 void setup ()
 {
  startTime = millis();
@@ -19,14 +21,14 @@ minim = new Minim(this);
  size(1024,500,P3D);
   colorMode(HSB);
 img = loadImage("Free2.jpeg");
-
+img1 = loadImage("Fallen1.jpeg");
     minim = new Minim(this);
 ap = minim.loadFile("Fantasy Note.mp3",1024);
 ap.play();
 ab = ap.mix;
 halfH = height/2;
 //colorInc= 255/(float)ab.size();
-fill(2);
+fill(3);
 
 }
  Minim minim;
@@ -43,7 +45,7 @@ void draw()
     image(img, 0, 0); 
 //background(200);
 if (phase == 0) {
-text("phase 0", 100, 100);
+//text("phase 0", 100, 100);
 if (millis() - startTime > duration) {
   setup1();
   Part1draw();
@@ -52,26 +54,40 @@ phase = 1;
 }
 }
 if(phase == 1){
-text("phase 1", 100, 100);
+//text("phase 1", 100, 100);
 setup1();
   Part1draw();
-if (millis() - startTime > duration*18) {
+if (millis() - startTime > duration*15.6) {
 
 phase = 2 ;
 }
 }
 
-if(phase == 2){
+  if(phase == 2){
 text("phase 2", 100, 100);
-setup2(); 
-display();
-if (millis() - startTime > duration*21.3) {
+Snowsetup(); 
+Snowdraw();
+if (millis() - startTime > duration*17) {
 
-phase = 2;
+phase = 3;
 }
 }
   
+if(phase == 3){
+//text("phase 3", 100, 100);
+setup2(); 
+display();
+if (millis() - startTime > duration*24.9) {
+
+phase = 4;
 }
+}
+  
+
+  
+  
+}
+
   
 
 

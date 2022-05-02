@@ -12,7 +12,7 @@ float[] lerpedBuffer = new float[1024];
 void setup2(){
    halfH = height/2;
   colorInc = 255/(float)ab.size(); 
-  
+  img1 = loadImage("Fallen1.jpeg");
 }
 
 
