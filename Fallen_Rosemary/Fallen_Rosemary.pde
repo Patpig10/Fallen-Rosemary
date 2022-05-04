@@ -7,6 +7,7 @@ import ddf.minim.ugens.*;
 Testlii b;
 Part1 a;
 Snow s;
+Part3 d;
 int phase = 0;
 long startTime = 0;
 int duration = 3000;
@@ -17,6 +18,7 @@ void setup ()
  startTime = millis();
 minim = new Minim(this);
   b = new Testlii();
+   d = new Part3();
   //fullScreen();
  size(1024,500,P3D);
   colorMode(HSB);
@@ -28,7 +30,7 @@ ap.play();
 ab = ap.mix;
 halfH = height/2;
 //colorInc= 255/(float)ab.size();
-fill(3);
+fill(4);
 
 }
  Minim minim;
@@ -83,7 +85,15 @@ phase = 4;
 }
 }
   
+if(phase == 4){
+//text("phase 3", 100, 100);
+setup3();
+draw3();
+if (millis() - startTime > duration*24.9) {
 
+//phase = 4;
+}
+}
   
   
 }
